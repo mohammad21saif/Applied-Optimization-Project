@@ -1,6 +1,9 @@
 # Applied-Optimization-Project
 By Mohammad Saifullah Khan (21169), Kulkarni Rahul Vivek (21150), Rahul Raj (21214)
 
+## Project Title
+Design Optimization of Linear Actuator
+
 ## To run Python Files
 For running differential evolution and SQP with branch and bound.
 ```bash
