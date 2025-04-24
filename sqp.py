@@ -1,11 +1,11 @@
 import numpy as np
 from scipy.optimize import minimize
 
-# Define the objective function (screw)
+# Objective function
 def screw(x):
     return (np.pi / 4) * (0.405 * x[0]**2 + x[1]**2 * x[3] + x[2]**2 * x[4])
 
-# Define the inequality constraints
+# Inequality constraints
 def gi(x):
     return np.array([
         -(38.88 + 96 * x[3] + 96 * x[4] - np.pi * 20000 * x[1]**3),
@@ -19,21 +19,20 @@ def gi(x):
         -(x[0] - x[1])
     ])
 
-# Define equality constraint
+# Equality constraint
 def h(x):
     return -x[2] + x[1] - 1.299 / x[7]
 
-# Bounds for the variables
+# Bounds
 LB = [0, 0, 0.1875, 7.023, 1.1525, 8, 0, 0]
 UB = [np.inf, 0.625, np.inf, 7.523, 1.6525, np.inf, 52, 24]
 
 # Initial guess
 x0 = [0.2, 0.2, 0.2, 7.3, 1.4, 10, 30, 22]
 
-# Define bounds as tuples (lower, upper)
 bounds = [(LB[i], UB[i]) for i in range(len(LB))]
 
-# Define constraints (both inequality and equality)
+# Constraints (both inequality and equality)
 constraints = [{'type': 'ineq', 'fun': gi},
                {'type': 'eq', 'fun': h}]
 
@@ -42,8 +41,6 @@ constraints = [{'type': 'ineq', 'fun': gi},
 result = minimize(screw, x0, method='SLSQP', bounds=bounds, constraints=constraints, options={'maxiter': 200, 'disp': True})
 
 
-# Results
+
 print(f"Optimal solution: {result.x}")
 print(f"Objective function value at optimal solution: {result.fun}")
-# print(f"Exit status: {result.message}")
-# print(f"Number of iterations: {result.nit}")
