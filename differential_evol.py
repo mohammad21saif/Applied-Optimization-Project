@@ -21,7 +21,6 @@ def cons(x):
     ]
     return np.array(c)
 
-# Finite bounds (replacing 'inf' with a large number like 1e6)
 bounds = [
     (0, 1e6),        # x1
     (0, 0.625),      # x2
@@ -33,10 +32,9 @@ bounds = [
     (0, 24)          # x8
 ]
 
-# Define constraint: all constraints ≤ 0
+#all constraints ≤ 0
 nonlinear_constraint = NonlinearConstraint(cons, -np.inf, 0)
 
-# Run differential evolution
 result = differential_evolution(
     fun,
     bounds,
@@ -47,6 +45,5 @@ result = differential_evolution(
     seed=42
 )
 
-# Output
 print("Optimal x:", result.x)
 print("Objective function value:", result.fun)
